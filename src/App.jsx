@@ -16,7 +16,7 @@ const StreamLangchain = () => {
 
     // Function to setup the WebSocket connection and define event handlers
     const setupWebSocket = () => {
-        ws.current = new WebSocket('ws://llm-django.onrender.com/ws/chat/');
+        ws.current = new WebSocket('ws://llm-django.onrender.com/');
         let ongoingStream = null; // To track the ongoing stream's ID
 
         ws.current.onopen = () => {
