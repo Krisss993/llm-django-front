@@ -55,6 +55,7 @@ const StreamLangchain = () => {
     const handleReconnect = () => {
         if (reconnectAttempts < maxReconnectAttempts) {
             let timeout = Math.pow(2, reconnectAttempts) * 1000; // Exponential backoff
+            setReconnectAttempts(prev => prev + 1); // Increment the reconnect attempts
             setTimeout(() => {
                 setupWebSocket(); // Attempt to reconnect
             }, timeout);
