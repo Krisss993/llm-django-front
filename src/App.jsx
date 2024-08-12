@@ -96,7 +96,15 @@ const StreamLangchain = () => {
         e.preventDefault();
         const userMessage = { sender: "You", message: input };
         setResponses(prevResponses => [...prevResponses, userMessage]);
-        ws.current.send(JSON.stringify({ message: input })); // Send message through WebSocket
+
+        // Check if the WebSocket is in the OPEN state before sending the message
+        if (ws.current.readyState === WebSocket.OPEN) {
+            ws.current.send(JSON.stringify({ message: input })); // Send message through WebSocket
+        } else {
+            console.error("WebSocket is not open. Message not sent.");
+            // Optionally, you can add logic to queue the message and retry sending later
+        }
+        
         setInput(''); // Clear input field
     };
 
